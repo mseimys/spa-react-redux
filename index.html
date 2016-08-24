@@ -2,94 +2,209 @@
 <html lang="en">
 
 <head>
-	<meta charset="utf-8">
+<meta charset="utf-8">
 
-	<title>Modern Architecture of Single Page Applications: React+Redux Case Study</title>
+<title>Modern Architecture of Single Page Applications: React+Redux Case Study</title>
 
-	<meta name="description" content="">
-	<meta name="author" content="">
+<meta name="description" content="">
+<meta name="author" content="">
 
-	<meta name="apple-mobile-web-app-capable" content="yes" />
-	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
-	<link rel="stylesheet" href="css/reveal.css">
-	<link rel="stylesheet" href="css/theme/serif.css" id="theme">
+<link rel="stylesheet" href="css/reveal.css">
+<link rel="stylesheet" href="css/theme/serif.css" id="theme">
 
-	<!-- Code syntax highlighting -->
-	<link rel="stylesheet" href="lib/css/highlightjs/obsidian.css">
+<!-- Code syntax highlighting -->
+<link rel="stylesheet" href="lib/css/highlightjs/obsidian.css">
 
-	<!-- Printing and PDF exports -->
-	<script>
-		var link = document.createElement( 'link' );
-		link.rel = 'stylesheet';
-		link.type = 'text/css';
-		link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-		document.getElementsByTagName( 'head' )[0].appendChild( link );
-	</script>
+<!-- Printing and PDF exports -->
+<script>
+	var link = document.createElement( 'link' );
+	link.rel = 'stylesheet';
+	link.type = 'text/css';
+	link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+	document.getElementsByTagName( 'head' )[0].appendChild( link );
+</script>
 
-	<style>
-	.reveal pre code {
-		display: block;
-		padding: 5px;
-		overflow: auto;
-		max-height: 400px;
-		word-wrap: normal;
-	}
-	</style>
+<style>
+.reveal section img {
+	border: 0;
+}
+</style>
 
-	<!--[if lt IE 9]>
-	<script src="lib/js/html5shiv.js"></script>
-	<![endif]-->
+<!--[if lt IE 9]>
+<script src="lib/js/html5shiv.js"></script>
+<![endif]-->
 </head>
 
 <body>
 
-	<div class="reveal">
-		<div class="slides">
+<div class="reveal">
+	<div class="slides">
 
-			<section>
-				<h3>Modern Architecture of SPA: React+Redux Case Study</h3>
-				<p>@mseimys</p>
-				<pre><code class="javascript" data-trim>
-const test = 123;
-let some_string = "123";
-	shoot = (s) => {
+		<section>
+			<h3>Modern Architecture of SPA: React+Redux Case Study</h3>
+			<h4>Matas Šeimys</h4>
+			<img style="padding: 10px; width: 200px" src="imgs/adform.png"/>
+			<p><small>2016 08 24</small></p>
+		</section>
+
+		<section>
+			<h2>About me</h2>
+		</section>
+
+		<section data-markdown>
+## Overview
+
+* What is a single page application
+* Initial approaches
+* Functional reactive programming
+* React
+* Redux
+* React+Redux=BFF
+		</section>
+
+		<section>
+			<h2>Single page applications</h2>
+			<p>Benefits: better experience, minimum at backend independent backend and frontend</p>
+		</section>
+
+		<section>
+			<h2>Initial approach and problems</h2>
+* Let's make a few AJAX calls...
+* Growth of complexity
+* UI data binding pattern
+		</section>
+
+		<section>
+			<h2>First attempts to solve it</h2>
+			<p>UI data binding is a software design pattern to simplify development of GUI applications. UI data binding binds UI elements to an application domain model. Most frameworks employ the Observer pattern as the underlying binding mechanism.</p>
+		</section>
+
+		<section>
+			<h2>Functional Reactive Programming</h2> 
+What is it? The simple answer to 
+this question is that there is no simple answer.
+FRP is about "datatypes that represent a value 'over time'"
+You can define them and combine them, pass them into & out of functions
+
+<code class="javascript" data-trim>
+x = [[mouse-x]];
+y = [[mouse-y]];
+minX = x - 16;
+minY = y - 16;
+maxX = x + 16;
+maxY = y + 16;
+rectangle(minX, minY, maxX, maxY)
+</code></pre>
+
+  * Immutable data --- [1,2] --> [1,2,3] - amazing change detection perfomance, new stream based on another stream does not modify the original stream in any way. This is a property called immutability
+  * Pure functions
+  * One-way state transitions
+  * Observables (subscribing to events)
+  * Static typing (avoids runtime errors)
+</section>
+
+		<section>
+			<h2>Pure functions</h2>
+			<p>No side effects, simple to build, SUPER easy to test, and maintain</p>
+			<p>Follow the single responsibility principle and keep things simple</p>
+			<pre><code class="javascript" data-trim>
+function buyItem(customer, item) {
+  if(customer.hasNoBasket) {
+    customer.basket = [];
+  }
+  customer.basket.push(item.id);
+  return item;
 }
-				</code></pre>
-			</section>
+			</code></pre>
+		</section>
 
-		</div>
+		<section>
+			<h2>Components</h2>
+			<p>Single responsibility principle: a component should ideally only do one thing. If it ends up growing, it should be decomposed into smaller subcomponents.</p>
+		</section>
+
+		<section>
+			<img class="stretch"  src="imgs/js_framework_switching.png"/>
+		</section>
+
+		<section>
+			<h2>Let's React!
+* No idea of rerendering
+* Tracking of what has changed
+		</section>
+		
+		<section>
+			<h2>Hands on React</h2>
+		</section>
+
+		<section>
+			<h2>Redux: Connect everything!</h2>
+* Overall architecture - Flux
+* Single source of truth
+* Dumb components
+* Connected components
+* Actions are dispatched
+		</section>
+
+		<section>
+			<h2>Hands on Redux</h2>
+		</section>
+
+		<section>
+			<h2>Final words</h2>
+			<ul>
+				<li>No "best" framework that fits it all</li>
+				<li>Know principles, paradigms</li>
+				<li>Choose frameworks wisely</li>
+			</ul>
+		</section>
+
+		<section>
+			<!-- Most common question in forums “What should I learn now?” Or “What should I learn first?”. -->
+			<img src="imgs/dog.jpg" />
+			<p>Do not be like the dog.</p>
+			<p>YOu should aim to understand the root. Less distraction, more focus.</p>
+		</section>
+
+		<section>
+			<img class="stretch" src="imgs/go-home.jpg" />
+		</section>
+
 	</div>
+</div>
 
-	<script src="lib/js/head.min.js"></script>
-	<script src="js/reveal.js"></script>
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
 
-	<script>
+<script>
 
-		// Full list of configuration options available at:
-		// https://github.com/hakimel/reveal.js#configuration
-		Reveal.initialize({
-			controls: false,
-			progress: true,
-			history: true,
-			center: true,
+	// Full list of configuration options available at:
+	// https://github.com/hakimel/reveal.js#configuration
+	Reveal.initialize({
+		controls: false,
+		progress: true,
+		history: true,
+		center: true,
 
-			transition: 'slide', // none/fade/slide/convex/concave/zoom
+		transition: 'none', // none/fade/slide/convex/concave/zoom
 
-			// Optional reveal.js plugins
-			dependencies: [
-				{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-				{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-				{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-				{ src: 'plugin/highlight/highlight.pack.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
-				{ src: 'plugin/zoom-js/zoom.js', async: true },
-				{ src: 'plugin/notes/notes.js', async: true }
-			]
-		});
+		// Optional reveal.js plugins
+		dependencies: [
+			{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+			{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+			{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+			{ src: 'plugin/highlight/highlight.pack.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+			{ src: 'plugin/zoom-js/zoom.js', async: true },
+			{ src: 'plugin/notes/notes.js', async: true }
+		]
+	});
 
-	</script>
+</script>
 
 </body>
 </html>
