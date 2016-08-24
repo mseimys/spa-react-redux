@@ -1,0 +1,23 @@
+{
+  "name": "spa-react-redux",
+  "version": "1.0.0",
+  "description": "Slides for lecture \"Modern Architecture of Single Page Applications: React+Redux Case Study\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mseimys/spa-react-redux.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mseimys/spa-react-redux/issues"
+  },
+  "homepage": "https://github.com/mseimys/spa-react-redux#readme",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-connect-multi": "^1.0.8"
+  }
+}
