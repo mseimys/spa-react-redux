@@ -373,7 +373,7 @@ ReactDOM.render(&lt;App />, document.getElementById("app"));
 		<section data-markdown>
 			## Redux principles
 * Everything starts with an action
-* Single source of truth
+* Single source of truth - store
 * State is read-only
 * Changes to state are made with pure functions (*reducers*)
 		</section>
@@ -455,7 +455,7 @@ const store = createStore(reducers);
 		</section>
 
 		<section>
-			<h2>Where values 'over time'?</h2>
+			<h2>Here be values 'over time'!!</h2>
 		<pre><code class="javascript" data-trim>
 import {connect} from "react-redux";
 
@@ -472,6 +472,7 @@ export const ConnectedMyComponent = connect(
     mapDispatchToProps
 )(MyComponent);
 
+// Behind the scenes MyComponent recieves new props:
 // &lt;ConnectedMyComponent counter={...} onIncrement={...}/>
 		</code></pre>
 		</section>
@@ -503,8 +504,23 @@ export const ConnectedMyComponent = connect(
 			<p>You should aim to understand the root.</p><p>Less distraction, more focus.</p>
 		</section>
 
-		<section>
-			<img class="stretch" src="imgs/go-home.jpg" />
+		<section data-markdown>
+			## Code
+
+You can play with React+Redux here:
+
+https://github.com/mseimys/minimal-react-redux
+
+(Minimal amount of boilerplate code)
+		</section>
+
+		<section data-markdown>
+			## Sources
+
+* https://css-tricks.com/learning-react-redux/
+* http://satish-tech-talks.blogspot.lt/2012/12/architecture-of-modern-web-application.html
+* http://www.slideshare.net/scothis/aoa-mwa
+* http://blog.bitovi.com/longevity-or-lack-thereof-in-javascript-frameworks/
 		</section>
 
 	</div>
